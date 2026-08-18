@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 ROOT = Path(__file__).resolve().parent.parent; sys.path.insert(0, str(ROOT))
 from src.models.deep_v2 import EEGNet, DeepConvNet
 from src.models.train_v2 import ZScore, train_torch, predict_proba, aggregate_windows_to_trials, seed_all
-from src.evaluation.metrics_v2 import compute_all, choose_threshold
+from src.evaluation.metrics_v2 import compute_all, choose_threshold, choose_threshold
 
 def load(root, name):
     f = np.load(root/name/f"{name}_features_v2.npz", allow_pickle=True); w = np.load(root/name/f"{name}_windows_common_v2.npz", allow_pickle=True)
