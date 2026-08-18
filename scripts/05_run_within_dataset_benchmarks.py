@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 ROOT = Path(__file__).resolve().parent.parent; sys.path.insert(0, str(ROOT)); sys.path.insert(0, str(ROOT/"scripts"))
 from src.models.tabular_v2 import TabularEncoder, Head, EncHead
 from src.models.train_v2 import seed_all
-from src.evaluation.metrics_v2 import compute_all
+from src.evaluation.metrics_v2 import compute_all, choose_threshold
 E1 = importlib.import_module("04_run_leakage_audit")
 
 def train_mlp(Xtr, ytr, Xva, yva, device, seed, max_epochs, patience):
@@ -62,17 +62,25 @@ def main():
                         m = XGBClassifier(n_estimators=300, max_depth=3, learning_rate=0.05, subsample=0.8, colsample_bytree=0.8, scale_pos_weight=spw, random_state=seed, n_jobs=8, eval_metric="logloss", early_stopping_rounds=30 if va.any() else None)
                         if va.any(): m.fit(sc.transform(d["X"][tr]), d["y"][tr], eval_set=[(sc.transform(d["X"][va]), d["y"][va])], verbose=False); info = {"best_iteration": int(m.best_iteration)}
                         else: m.fit(sc.transform(d["X"][tr]), d["y"][tr])
-                        p = m.predict_proba(sc.transform(d["X"][te]))[:, 1]; tids = d["tid"][te]
+                        p = m.predict_proba(sc.transform(d["X"][te]))[:, 1]; tids = d["tid"][te]; info = {**info, "p_train": m.predict_proba(sc.transform(d["X"][tr]))[:, 1]}
                     elif model_name == "mlp":
                         sc = StandardScaler().fit(d["X"][tr]); Xva = sc.transform(d["X"][va]) if va.any() else sc.transform(d["X"][tr])[:2]; yva = d["y"][va] if va.any() else d["y"][tr][:2]
                         m, info = train_mlp(sc.transform(d["X"][tr]), d["y"][tr], Xva, yva, device, seed, 3 if a.smoke else 200, 2 if a.smoke else 20)
-                        with torch.no_grad(): p = torch.softmax(m(torch.tensor(sc.transform(d["X"][te]), dtype=torch.float32).to(device)), 1)[:, 1].cpu().numpy()
+                        with torch.no_grad():
+                            p = torch.softmax(m(torch.tensor(sc.transform(d["X"][te]), dtype=torch.float32).to(device)), 1)[:, 1].cpu().numpy()
+                            info = {**info, "p_train": torch.softmax(m(torch.tensor(sc.transform(d["X"][tr]), dtype=torch.float32).to(device)), 1)[:, 1].cpu().numpy()}
                         tids = d["tid"][te]
                     else: tids, p, info = E1.run_deep(model_name, d, wtr, wva, wte, d["wy"], seed, device, a.smoke)
                     pos = {t: i for i, t in enumerate(d["tid"])}; idx = np.array([pos[t] for t in tids])
                     rows = pd.DataFrame({"dataset": name, "protocol": "subjectwise", "model": model_name, "seed": seed, "fold": fi, "subject_id": d["sid"][idx], "trial_id": tids, "y_true": d["y"][idx], "y_prob": p, "y_pred": (p >= 0.5).astype(int),
                                          "n_train_subjects": len(np.unique(d["sid"][tr])), "n_test_subjects": len(np.unique(d["sid"][te]))})
-                    rows.to_csv(fn, index=False); mt = compute_all(rows.y_true.values, rows.y_prob.values)
+                    p_train = info.pop("p_train", None); train_tids = info.pop("train_tids", d["tid"][tr] if p_train is not None else None)
+                    if p_train is not None:
+                        tpos = np.array([pos[t] for t in train_tids]); ytrn = y_tr[tpos] if "y_tr" in dir() else d["y"][tpos]
+                        thr = choose_threshold(ytrn, p_train); pd.DataFrame({"trial_id": train_tids, "subject_id": d["sid"][tpos], "y_true": ytrn, "y_prob": p_train}).to_csv(str(fn).replace(".csv", "__train.csv"), index=False)
+                    else: thr = 0.5
+                    rows["threshold_train"] = thr; rows["y_pred_thr"] = (rows.y_prob >= thr).astype(int)
+                    rows.to_csv(fn, index=False); mt = compute_all(rows.y_true.values, rows.y_prob.values, thr)
                     quick.append({"dataset": name, "model": model_name, "seed": seed, "fold": fi, "mcc": mt["mcc"], "roc_auc": mt["roc_auc"], "bal_acc": mt["balanced_accuracy"], **{f"train_{k}": v for k, v in info.items()}})
                     log.info(f"{name:15s} {model_name:11s} seed={seed} fold={fi} n_test={mt['n']:4d} MCC={mt['mcc']:+.3f} AUC={mt['roc_auc']:.3f} balAcc={mt['balanced_accuracy']:.3f} ({time.time()-t0:.0f}s)")
     if quick:

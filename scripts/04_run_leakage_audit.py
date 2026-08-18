@@ -12,7 +12,7 @@ from sklearn.preprocessing import StandardScaler
 ROOT = Path(__file__).resolve().parent.parent; sys.path.insert(0, str(ROOT))
 from src.models.deep_v2 import EEGNet, DeepConvNet
 from src.models.train_v2 import ZScore, train_torch, predict_proba, aggregate_windows_to_trials, seed_all
-from src.evaluation.metrics_v2 import compute_all
+from src.evaluation.metrics_v2 import compute_all, choose_threshold
 
 def load(root, name):
     f = np.load(root/name/f"{name}_features_v2.npz", allow_pickle=True); w = np.load(root/name/f"{name}_windows_common_v2.npz", allow_pickle=True)
@@ -40,7 +40,7 @@ def run_classical(model_name, d, tr, va, te, y_tr, seed):
     else:
         n_min = int(np.bincount(y_tr[tr], minlength=2).min()); cv = 3 if n_min >= 3 else 2
         m = CalibratedClassifierCV(SVC(kernel="rbf", C=1.0, gamma="scale", class_weight="balanced", random_state=seed), method="sigmoid", cv=cv, ensemble=False)
-    m.fit(Xtr, y_tr[tr]); return m.predict_proba(Xte)[:, 1], {}
+    m.fit(Xtr, y_tr[tr]); return m.predict_proba(Xte)[:, 1], {"p_train": m.predict_proba(Xtr)[:, 1]}
 
 def run_deep(model_name, d, wtr, wva, wte, wy_tr, seed, device, smoke):
     z = ZScore().fit(d["W"][wtr]); Wtr, Wva, Wte = z.transform(d["W"][wtr]), z.transform(d["W"][wva]), z.transform(d["W"][wte])
@@ -49,7 +49,8 @@ def run_deep(model_name, d, wtr, wva, wte, wy_tr, seed, device, smoke):
     if not wva.any(): Wva, yva = Wtr[:1], wy_tr[wtr][:1]
     else: yva = wy_tr[wva]
     net, info = train_torch(net, Wtr, wy_tr[wtr], Wva, yva, device, max_epochs=(3 if smoke else 100), patience=(2 if smoke else 15), seed=seed)
-    p_win = predict_proba(net, Wte, device); tids, p_tr = aggregate_windows_to_trials(p_win, d["wtid"][wte]); return tids, p_tr, info
+    p_win = predict_proba(net, Wte, device); tids, p_tr = aggregate_windows_to_trials(p_win, d["wtid"][wte])
+    ttids, tp = aggregate_windows_to_trials(predict_proba(net, Wtr, device), d["wtid"][wtr]); info = {**info, "p_train": tp, "train_tids": ttids}; return tids, p_tr, info
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
@@ -90,7 +91,13 @@ def main():
                         pos = {t: i for i, t in enumerate(d["tid"])}; idx = np.array([pos[t] for t in tids])
                         rows = pd.DataFrame({"dataset": name, "protocol": protocol, "model": model_name, "seed": seed, "fold": fi, "subject_id": d["sid"][idx], "trial_id": tids,
                                              "y_true": d["y"][idx], "y_prob": p, "y_pred": (p >= 0.5).astype(int), "n_train_subjects": len(np.unique(d["sid"][tr])), "n_test_subjects": len(np.unique(d["sid"][te]))})
-                        rows.to_csv(fn, index=False); mt = compute_all(rows.y_true.values, rows.y_prob.values)
+                        p_train = info.pop("p_train", None); train_tids = info.pop("train_tids", d["tid"][tr] if p_train is not None else None)
+                    if p_train is not None:
+                        tpos = np.array([pos[t] for t in train_tids]); ytrn = y_tr[tpos] if "y_tr" in dir() else d["y"][tpos]
+                        thr = choose_threshold(ytrn, p_train); pd.DataFrame({"trial_id": train_tids, "subject_id": d["sid"][tpos], "y_true": ytrn, "y_prob": p_train}).to_csv(str(fn).replace(".csv", "__train.csv"), index=False)
+                    else: thr = 0.5
+                    rows["threshold_train"] = thr; rows["y_pred_thr"] = (rows.y_prob >= thr).astype(int)
+                    rows.to_csv(fn, index=False); mt = compute_all(rows.y_true.values, rows.y_prob.values, thr)
                         quick.append({"dataset": name, "protocol": protocol, "model": model_name, "seed": seed, "fold": fi, "mcc": mt["mcc"], "roc_auc": mt["roc_auc"], "bal_acc": mt["balanced_accuracy"], "n_test": mt["n"], **{f"train_{k}": v for k, v in info.items()}})
                         log.info(f"{name:15s} {protocol:20s} {model_name:11s} seed={seed} fold={fi} n_test={mt['n']:4d} MCC={mt['mcc']:+.3f} AUC={mt['roc_auc']:.3f} balAcc={mt['balanced_accuracy']:.3f} ({time.time()-t0:.0f}s)")
     if quick:

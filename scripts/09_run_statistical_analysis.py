@@ -12,21 +12,27 @@ from src.statistics.paired_v2 import bootstrap_ci, paired_compare, holm
 METRICS = ["mcc", "kappa", "balanced_accuracy", "pr_auc", "roc_auc", "macro_f1", "sensitivity", "specificity", "ece"]
 
 def load_preds(pdir):
-    fs = sorted(glob.glob(str(pdir/"*__*__*__seed*__fold*.csv")))
+    fs = sorted(f for f in glob.glob(str(pdir/"*__*__*__seed*__fold*.csv")) if not f.endswith("__train.csv"))
     if not fs: return None
-    return pd.concat([pd.read_csv(f) for f in fs], ignore_index=True)
+    df = pd.concat([pd.read_csv(f) for f in fs], ignore_index=True)
+    if "threshold_train" not in df.columns: df["threshold_train"] = np.nan
+    df["threshold_train"] = df["threshold_train"].fillna(0.5); return df
 
 def participant_metrics(df):
     """One row per (dataset, protocol, model, seed, subject): metrics on that participant's held-out trials (pooled over folds within seed — each subject is tested once per seed)."""
     rows = []
     for (ds, pr, mo, se, su), g in df.groupby(["dataset", "protocol", "model", "seed", "subject_id"]):
-        m = compute_all(g.y_true.values, g.y_prob.values); rows.append({"dataset": ds, "protocol": pr, "model": mo, "seed": se, "subject_id": su, "n_trials": len(g), "single_class": int(g.y_true.nunique() < 2), **{k: m[k] for k in METRICS + ["accuracy"]}})
+        m = compute_all(g.y_true.values, g.y_prob.values, float(g.threshold_train.iloc[0])); rows.append({"dataset": ds, "protocol": pr, "model": mo, "seed": se, "subject_id": su, "threshold": float(g.threshold_train.iloc[0]), "n_trials": len(g), "single_class": int(g.y_true.nunique() < 2), **{k: m[k] for k in METRICS + ["accuracy"]}})
     return pd.DataFrame(rows)
 
 def pooled_metrics(df):
     rows = []
     for (ds, pr, mo, se), g in df.groupby(["dataset", "protocol", "model", "seed"]):
-        m = compute_all(g.y_true.values, g.y_prob.values); rows.append({"dataset": ds, "protocol": pr, "model": mo, "seed": se, "n_trials": len(g), "n_subjects": g.subject_id.nunique(), **{k: m[k] for k in METRICS + ["accuracy"]}})
+        # pooled over folds: thresholds may differ per fold -> apply each fold's own training threshold to its own test trials
+        yh = (g.y_prob.values >= g.threshold_train.values).astype(int); m = compute_all(g.y_true.values, g.y_prob.values); 
+        from sklearn.metrics import matthews_corrcoef, cohen_kappa_score, balanced_accuracy_score, f1_score, recall_score
+        if g.y_true.nunique() == 2: m.update({"mcc": float(matthews_corrcoef(g.y_true, yh)), "kappa": float(cohen_kappa_score(g.y_true, yh)), "balanced_accuracy": float(balanced_accuracy_score(g.y_true, yh)), "macro_f1": float(f1_score(g.y_true, yh, average="macro")), "sensitivity": float(recall_score(g.y_true, yh, pos_label=1)), "specificity": float(recall_score(g.y_true, yh, pos_label=0)), "accuracy": float((g.y_true.values == yh).mean())})
+        rows.append({"dataset": ds, "protocol": pr, "model": mo, "seed": se, "n_trials": len(g), "n_subjects": g.subject_id.nunique(), **{k: m[k] for k in METRICS + ["accuracy"]}})
     return pd.DataFrame(rows)
 
 def summarize(part, pooled, metric="mcc"):
