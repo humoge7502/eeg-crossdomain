@@ -37,6 +37,7 @@ def main():
     ap.add_argument("--config", default="configs/experiment_v2.yaml"); ap.add_argument("--seed", type=int, default=None); ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2, 3, 4])
     ap.add_argument("--smoke", action="store_true"); ap.add_argument("--output-dir", default="outputs"); ap.add_argument("--datasets", nargs="+", default=["neuma", "restaurant_logo", "ds007406"])
     ap.add_argument("--models", nargs="+", default=["logreg", "svm_rbf", "xgboost", "mlp", "eegnet", "deepconvnet"]); ap.add_argument("--gpu", type=int, default=0)
+    ap.add_argument("--features", default="v2")
     a = ap.parse_args(); cfg = yaml.safe_load(open(ROOT/a.config)); root = ROOT/(cfg["output_root"] + ("_smoke" if a.smoke else "")); splits = root/"splits"
     seeds = [a.seed] if a.seed is not None else a.seeds; out = ROOT/a.output_dir; suffix = "" if a.features == "v2" else "_" + a.features.replace("_v2", "")
     tag = ("exp2_within_smoke" if a.smoke else "exp2_within") + suffix; pred_dir = out/"predictions"/tag; pred_dir.mkdir(parents=True, exist_ok=True)
