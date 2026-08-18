@@ -38,14 +38,15 @@ def main():
     ap.add_argument("--smoke", action="store_true"); ap.add_argument("--output-dir", default="outputs"); ap.add_argument("--datasets", nargs="+", default=["neuma", "restaurant_logo", "ds007406"])
     ap.add_argument("--models", nargs="+", default=["logreg", "svm_rbf", "xgboost", "mlp", "eegnet", "deepconvnet"]); ap.add_argument("--gpu", type=int, default=0)
     a = ap.parse_args(); cfg = yaml.safe_load(open(ROOT/a.config)); root = ROOT/(cfg["output_root"] + ("_smoke" if a.smoke else "")); splits = root/"splits"
-    seeds = [a.seed] if a.seed is not None else a.seeds; out = ROOT/a.output_dir; tag = "exp2_within_smoke" if a.smoke else "exp2_within"; pred_dir = out/"predictions"/tag; pred_dir.mkdir(parents=True, exist_ok=True)
-    e1_dir = out/"predictions"/("exp1_leakage_smoke" if a.smoke else "exp1_leakage"); ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S"); (out/"logs").mkdir(exist_ok=True)
+    seeds = [a.seed] if a.seed is not None else a.seeds; out = ROOT/a.output_dir; suffix = "" if a.features == "v2" else "_" + a.features.replace("_v2", "")
+    tag = ("exp2_within_smoke" if a.smoke else "exp2_within") + suffix; pred_dir = out/"predictions"/tag; pred_dir.mkdir(parents=True, exist_ok=True)
+    e1_dir = out/"predictions"/(("exp1_leakage_smoke" if a.smoke else "exp1_leakage") + suffix); ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S"); (out/"logs").mkdir(exist_ok=True)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", handlers=[logging.FileHandler(out/"logs"/f"05_within_{ts}.log"), logging.StreamHandler()]); log = logging.getLogger("e2")
     device = torch.device(f"cuda:{a.gpu if a.gpu < torch.cuda.device_count() else 0}" if torch.cuda.is_available() else "cpu"); json.dump({"args": vars(a), "config": cfg, "timestamp": ts}, open(pred_dir/f"run_config_{ts}.json", "w"), indent=1, default=str)
     from xgboost import XGBClassifier
     quick = []
     for name in a.datasets:
-        d = E1.load(root, name); SW = json.load(open(splits/f"within_subjectwise_{name}.json"))["folds_by_seed"]
+        d = E1.load(root, name, a.features); SW = json.load(open(splits/f"within_subjectwise_{name}.json"))["folds_by_seed"]
         for seed in seeds:
             for fold in SW[str(seed)][: (2 if a.smoke else None)]:
                 fi = fold["fold"]; tr, va, te, wtr, wva, wte = E1.masks_from_fold(d, fold, "subjectwise")

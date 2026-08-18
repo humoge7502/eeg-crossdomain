@@ -16,8 +16,8 @@ from src.models.train_v2 import ZScore, train_torch, predict_proba, aggregate_wi
 from src.evaluation.metrics_v2 import compute_all, choose_threshold
 
 
-def load(root, name):
-    f = np.load(root/name/f"{name}_features_v2.npz", allow_pickle=True)
+def load(root, name, feat="v2"):
+    f = np.load(root/name/f"{name}_features_{feat}.npz", allow_pickle=True)
     w = np.load(root/name/f"{name}_windows_common_v2.npz", allow_pickle=True)
     return {"X": f["X"].astype(np.float32), "y": f["y"].astype(int),
             "sid": f["subject_ids"].astype(str), "tid": f["trial_ids"].astype(str),
@@ -88,13 +88,15 @@ def main():
     ap.add_argument("--models", nargs="+", default=["logreg", "svm_rbf", "eegnet", "deepconvnet"])
     ap.add_argument("--resume", action="store_true", default=True)
     ap.add_argument("--gpu", type=int, default=0)
+    ap.add_argument("--features", default="v2", help="v2 (raw) or persubj_v2 (per-participant z-scored)")
     a = ap.parse_args()
     cfg = yaml.safe_load(open(ROOT/a.config))
     root = ROOT/(cfg["output_root"] + ("_smoke" if a.smoke else ""))
     splits = root/"splits"
     seeds = [a.seed] if a.seed is not None else a.seeds
     out = ROOT/a.output_dir
-    tag = "exp1_leakage_smoke" if a.smoke else "exp1_leakage"
+    suffix = "" if a.features == "v2" else "_" + a.features.replace("_v2", "")
+    tag = ("exp1_leakage_smoke" if a.smoke else "exp1_leakage") + suffix
     pred_dir = out/"predictions"/tag
     pred_dir.mkdir(parents=True, exist_ok=True)
     (out/"logs").mkdir(exist_ok=True)
@@ -110,7 +112,7 @@ def main():
               open(pred_dir/f"run_config_{ts}.json", "w"), indent=1, default=str)
     quick = []
     for name in a.datasets:
-        d = load(root, name)
+        d = load(root, name, a.features)
         if not (splits/f"within_subjectwise_{name}.json").exists():
             log.warning(f"no splits for {name}"); continue
         SW = json.load(open(splits/f"within_subjectwise_{name}.json"))["folds_by_seed"]

@@ -66,6 +66,14 @@ features:
   secondary: log10(absolute band power, V^2)
   faa: ln(alpha_abs F4) - ln(alpha_abs F3); positive = greater right-alpha
   vector: 7 channels x 5 bands (channel-major) + FAA = 36
+  per_participant_normalization:
+    file: '{name}_features_persubj_v2.npz'
+    method: z-score within participant over own trials
+    uses_labels: false
+    transductive: true
+    justification: 'diagnostics: rest-vs-task AUC 0.945 within-participant vs 0.682
+      cross-participant; per-participant z raised cross-participant AUC to 0.753'
+    must_declare_in_manuscript: true
 epochs:
   neuma:
     anchor: mouse_dwell_onset_on_product_box
