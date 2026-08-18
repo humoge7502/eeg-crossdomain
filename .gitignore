@@ -1,0 +1,15 @@
+venv/
+data/
+results/
+outputs/predictions/
+outputs/logs/
+outputs/checkpoints/
+*.npz
+*.zip
+*.log
+*.txt
+!requirements.txt
+!channel_info.txt
+__pycache__/
+.ipynb_checkpoints/
+Untitled Folder/

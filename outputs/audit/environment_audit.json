@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-08-18T04:00:37.763489",
+  "cwd": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace",
+  "python": "3.12.3 (main, Mar 23 2026, 19:04:32) [GCC 13.3.0]",
+  "executable": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/venv/bin/python",
+  "virtual_env": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/venv",
+  "conda_prefix": "/home/nvidia/miniconda_311",
+  "platform": "Linux-6.17.0-1010-azure-x86_64-with-glibc2.39",
+  "cpu_count": 96,
+  "seed": 42,
+  "smoke": false,
+  "config": "configs/paths_audit.yaml",
+  "disk_gb": {
+    "total": 518.9,
+    "free": 31.2
+  },
+  "disk_mnt_gb": {
+    "total": 3063.8,
+    "free": 2621.4
+  },
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pandas": "3.0.5",
+    "sklearn": "1.9.0",
+    "xgboost": "3.4.1",
+    "torch": "2.13.0+cu130",
+    "mne": "1.12.1",
+    "pyxdf": "1.17.5",
+    "pyriemann": "0.12",
+    "statsmodels": "0.14.6",
+    "yaml": "6.0.3",
+    "matplotlib": "3.11.1",
+    "seaborn": "0.13.2",
+    "pytest": "9.1.1",
+    "h5py": "3.16.0",
+    "mat73": "present",
+    "tqdm": "4.70.0"
+  },
+  "torch": {
+    "cuda_available": true,
+    "cuda_version": "13.0",
+    "device_count": 1,
+    "devices": [
+      "NVIDIA A100-SXM4-80GB"
+    ]
+  },
+  "nvidia_smi": "0, NVIDIA A100-SXM4-80GB, 1698 MiB, 81920 MiB\n1, NVIDIA A100-SXM4-80GB, 463 MiB, 81920 MiB\n2, NVIDIA A100-SXM4-80GB, 464 MiB, 81920 MiB\n3, NVIDIA A100-SXM4-80GB, 4 MiB, 81920 MiB\n4, NVIDIA A100-SXM4-80GB, 4 MiB, 81920 MiB\n5, NVIDIA A100-SXM4-80GB, 498 MiB, 81920 MiB\n6, NVIDIA A100-SXM4-80GB, 4 MiB, 81920 MiB\n7, NVIDIA A100-SXM4-80GB, 1069 MiB, 81920 MiB",
+  "git": {
+    "inside": "true",
+    "head": "fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.\nUse '--' to separate paths from revisions, like this:\n'git <command> [<revision>...] -- [<file>...]'\nHEAD",
+    "status_lines": 123
+  }
+}

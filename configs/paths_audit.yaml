@@ -1,0 +1,46 @@
+audit_seed: 42
+datasets:
+  neuma:
+    label_task: Buy vs NoBuy
+    confirmed: /mnt/Neuma_Model/DataSource
+    candidates:
+    - /home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/neuma
+    - /mnt/Neuma_Model/DataSource
+    - /home/nvidia/24PHD1314/Quality-Aware-Consumer-Response/data/neuma_raw
+    - /home/nvidia/24PHD1314/ICAIN2026_NeuroClick_Hazard/neuma_source
+    eeg_glob: S*.xdf
+    participant_regex: ^S(\d+)\.xdf$
+    aux_globs:
+    - '*.xls*'
+    - Dependencies/**/*.mat
+    - '*.pdf'
+  restaurant_logo:
+    label_task: Recognized vs NotRecognized
+    confirmed: /home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing
+    candidates:
+    - /home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing
+    - /home/nvidia/24PHD1314/eeg-crossdomain-workspace/Neuromarketing (1).zip
+    eeg_glob: Subject */Sub*_Test.set
+    participant_regex: (?i)Sub(\d+)_
+    aux_globs: []
+  ds007406:
+    label_task: Extreme vs Traditional advertisements
+    confirmed: /home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/ds007406/open
+      Neuro
+    candidates:
+    - /home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/ds007406/open Neuro
+    - /home/nvidia/24PHD1314/Quality-Aware-Consumer-Response/data/ds007406
+    eeg_glob: sub-*/eeg/*_eeg.set
+    participant_regex: ^(sub-\d+)
+    bids: true
+    required_suffixes:
+    - _eeg.set
+    - _events.tsv
+    - _channels.tsv
+    - _eeg.json
+processed_dir: /home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed
+processed_files:
+- '{name}_harmonized.npz'
+- '{name}_epochs.npz'
+- '{name}_epochs_common.npz'
+confirmed_on: '2026-08-18T04:03:06.785366'

@@ -1,0 +1,102 @@
+version: v2
+seed: 42
+paths_config: configs/paths_audit.yaml
+output_root: data/processed_v2
+shared_channels:
+- Fz
+- Cz
+- Pz
+- F3
+- F4
+- O1
+- O2
+line_freq_hz:
+  neuma: 50
+  restaurant_logo: 60
+  ds007406: 60
+preprocessing:
+  reference: common_average_over_native_scalp_channels_before_substitution
+  car_exclude:
+    neuma:
+    - A2
+  bandpass_hz:
+  - 1.0
+  - 45.0
+  notch: true
+  unit_scale_to_volts:
+    neuma: 1.0e-06
+    restaurant_logo: 1.0
+    ds007406: 1.0
+  note: ds007406 source is already 1-40 Hz FIR filtered; NeuMa and Restaurant-Logo
+    are filtered here.
+substitution:
+  method: nearest_neighbour_mean_of_equidistant_neighbours
+  montage: standard_1020
+  tie_tolerance_m: 0.002
+  candidates_exclude_shared_set: true
+features:
+  psd:
+    method: welch
+    window: hann
+    nperseg: min(n_samples, 2*sfreq)
+    noverlap: nperseg//2
+  bands_hz:
+    delta:
+    - 1
+    - 4
+    theta:
+    - 4
+    - 8
+    alpha:
+    - 8
+    - 13
+    beta:
+    - 13
+    - 30
+    gamma:
+    - 30
+    - 40
+  band_edges: half_open_lower_inclusive
+  total_power_range_hz:
+  - 1
+  - 40
+  gamma_note: Upper edge 40 Hz because ds007406 source data are software-filtered
+    at 40 Hz.
+  primary: log10(relative band power = band / total 1-40 Hz)
+  secondary: log10(absolute band power, V^2)
+  faa: ln(alpha_abs F4) - ln(alpha_abs F3); positive = greater right-alpha
+  vector: 7 channels x 5 bands (channel-major) + FAA = 36
+epochs:
+  neuma:
+    anchor: mouse_dwell_onset_on_product_box
+    tmin_s: 0.0
+    tmax_s: 1.0
+    min_dwell_mouse_samples: 3
+    mouse_x_offset_px: 0
+    label: Buy=1 if product in Q76/Q77/Q78 selections
+    mouse_x_offset_note: offset 0 confirmed by in-box fraction 0.88-0.90 vs 0.0 with
+      +1920
+  restaurant_logo:
+    anchor: ExperimentStart_marker_followed_by_keypress
+    tmin_s: 0.0
+    tmax_s: 3.0
+    label_source: ExperimentResults.xlsx_row_order
+    key_map:
+      A: 1
+      P: 0
+    note: keypress differs by class -> motor confound; RT stored per trial
+    alignment: LCS alignment of key-press label sequence to ExperimentResults.xlsx
+      row order; keep only agreeing aligned trials; extra/missing presses dropped
+      and logged
+  ds007406:
+    anchor: source_epoch
+    full_trial_s: 30.0
+    label_source: events.tsv value column
+    label_map:
+      extreme: 1
+      traditional: 0
+common_windows:
+  sfreq: 250
+  window_s: 1.0
+  overlap: 0.0
+  note: long trials are windowed, never truncated; trial_id kept for aggregation

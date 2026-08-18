@@ -1,0 +1,822 @@
+{
+  "timestamp": "2026-08-18T04:34:37.328576",
+  "config": "configs/paths_audit.yaml",
+  "seed": 42,
+  "smoke": true,
+  "datasets": {
+    "neuma": {
+      "label_task": "Buy vs NoBuy",
+      "confirmed": "/mnt/Neuma_Model/DataSource",
+      "candidates": [
+        {
+          "path": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/neuma",
+          "exists": true,
+          "n_eeg_files": 42,
+          "participant_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S05",
+            "S06",
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S16",
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S22",
+            "S23",
+            "S24",
+            "S25",
+            "S26",
+            "S27",
+            "S28",
+            "S29",
+            "S30",
+            "S31",
+            "S32",
+            "S33",
+            "S34",
+            "S35",
+            "S36",
+            "S37",
+            "S38",
+            "S39",
+            "S40",
+            "S41",
+            "S42",
+            "S43",
+            "S44"
+          ],
+          "duplicate_ids": [],
+          "aux_file_counts": {
+            "*.xls*": 43,
+            "Dependencies/**/*.mat": 8,
+            "*.pdf": 1
+          },
+          "note": "NeuMa Buy/NoBuy labels come from questionnaire xlsx (Q76-78) + click/mouse streams; label counts require the labelling pipeline and are NOT computed here."
+        },
+        {
+          "path": "/mnt/Neuma_Model/DataSource",
+          "exists": true,
+          "n_eeg_files": 42,
+          "participant_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S05",
+            "S06",
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S16",
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S22",
+            "S23",
+            "S24",
+            "S25",
+            "S26",
+            "S27",
+            "S28",
+            "S29",
+            "S30",
+            "S31",
+            "S32",
+            "S33",
+            "S34",
+            "S35",
+            "S36",
+            "S37",
+            "S38",
+            "S39",
+            "S40",
+            "S41",
+            "S42",
+            "S43",
+            "S44"
+          ],
+          "duplicate_ids": [],
+          "aux_file_counts": {
+            "*.xls*": 43,
+            "Dependencies/**/*.mat": 8,
+            "*.pdf": 1
+          },
+          "note": "NeuMa Buy/NoBuy labels come from questionnaire xlsx (Q76-78) + click/mouse streams; label counts require the labelling pipeline and are NOT computed here."
+        },
+        {
+          "path": "/home/nvidia/24PHD1314/Quality-Aware-Consumer-Response/data/neuma_raw",
+          "exists": true,
+          "n_eeg_files": 42,
+          "participant_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S05",
+            "S06",
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S16",
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S22",
+            "S23",
+            "S24",
+            "S25",
+            "S26",
+            "S27",
+            "S28",
+            "S29",
+            "S30",
+            "S31",
+            "S32",
+            "S33",
+            "S34",
+            "S35",
+            "S36",
+            "S37",
+            "S38",
+            "S39",
+            "S40",
+            "S41",
+            "S42",
+            "S43",
+            "S44"
+          ],
+          "duplicate_ids": [],
+          "aux_file_counts": {
+            "*.xls*": 43,
+            "Dependencies/**/*.mat": 8,
+            "*.pdf": 1
+          },
+          "note": "NeuMa Buy/NoBuy labels come from questionnaire xlsx (Q76-78) + click/mouse streams; label counts require the labelling pipeline and are NOT computed here."
+        },
+        {
+          "path": "/home/nvidia/24PHD1314/ICAIN2026_NeuroClick_Hazard/neuma_source",
+          "exists": true,
+          "n_eeg_files": 0,
+          "participant_ids": [],
+          "duplicate_ids": [],
+          "aux_file_counts": {
+            "*.xls*": 0,
+            "Dependencies/**/*.mat": 0,
+            "*.pdf": 0
+          },
+          "note": "NeuMa Buy/NoBuy labels come from questionnaire xlsx (Q76-78) + click/mouse streams; label counts require the labelling pipeline and are NOT computed here."
+        }
+      ],
+      "n_existing_candidates": 4,
+      "processed": [
+        {
+          "dataset": "neuma",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/neuma/neuma_harmonized.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            4708,
+            36
+          ],
+          "shape_y": [
+            4708
+          ],
+          "shape_subject_ids": [
+            4708
+          ],
+          "label_counts": {
+            "1": 1219,
+            "0": 3489
+          },
+          "n_subjects": 42,
+          "subject_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S05",
+            "S06",
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S16",
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S22",
+            "S23",
+            "S24",
+            "S25",
+            "S26",
+            "S27",
+            "S28",
+            "S29",
+            "S30",
+            "S31",
+            "S32",
+            "S33",
+            "S34",
+            "S35",
+            "S36",
+            "S37",
+            "S38",
+            "S39",
+            "S40",
+            "S41",
+            "S42",
+            "S43",
+            "S44"
+          ],
+          "X_finite": true,
+          "X_std": 1126.773265802961
+        },
+        {
+          "dataset": "neuma",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/neuma/neuma_epochs.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            4708,
+            1,
+            7,
+            360
+          ],
+          "shape_y": [
+            4708
+          ],
+          "shape_subject_ids": [
+            4708
+          ],
+          "label_counts": {
+            "1": 1219,
+            "0": 3489
+          },
+          "n_subjects": 42,
+          "subject_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S05",
+            "S06",
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S16",
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S22",
+            "S23",
+            "S24",
+            "S25",
+            "S26",
+            "S27",
+            "S28",
+            "S29",
+            "S30",
+            "S31",
+            "S32",
+            "S33",
+            "S34",
+            "S35",
+            "S36",
+            "S37",
+            "S38",
+            "S39",
+            "S40",
+            "S41",
+            "S42",
+            "S43",
+            "S44"
+          ],
+          "X_finite": true,
+          "X_std": 618.1610881398102
+        },
+        {
+          "dataset": "neuma",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/neuma/neuma_epochs_common.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            4708,
+            1,
+            7,
+            250
+          ],
+          "shape_y": [
+            4708
+          ],
+          "shape_subject_ids": [
+            4708
+          ],
+          "label_counts": {
+            "1": 1219,
+            "0": 3489
+          },
+          "n_subjects": 42,
+          "subject_ids": [
+            "S01",
+            "S02",
+            "S03",
+            "S05",
+            "S06",
+            "S07",
+            "S08",
+            "S09",
+            "S10",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S16",
+            "S17",
+            "S18",
+            "S19",
+            "S20",
+            "S21",
+            "S22",
+            "S23",
+            "S24",
+            "S25",
+            "S26",
+            "S27",
+            "S28",
+            "S29",
+            "S30",
+            "S31",
+            "S32",
+            "S33",
+            "S34",
+            "S35",
+            "S36",
+            "S37",
+            "S38",
+            "S39",
+            "S40",
+            "S41",
+            "S42",
+            "S43",
+            "S44"
+          ],
+          "X_finite": true,
+          "X_std": 618.3448486328125
+        }
+      ]
+    },
+    "restaurant_logo": {
+      "label_task": "Recognized vs NotRecognized",
+      "confirmed": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing",
+      "candidates": [
+        {
+          "path": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing",
+          "exists": true,
+          "n_files": 15,
+          "ext_hist": {
+            ".set": 15
+          },
+          "sample_files": [
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 1/Sub1_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 10/Sub10_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 11/Sub11_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 12/Sub12_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 13/Sub13_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 14/Sub14_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 15/Sub15_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 2/Sub2_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 3/Sub3_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 4/Sub4_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 5/Sub5_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 6/Sub6_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 7/Sub7_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 8/Sub8_Test.set",
+            "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing/Subject 9/Sub9_Test.set"
+          ],
+          "participant_ids": [
+            "P001",
+            "P002",
+            "P003",
+            "P004",
+            "P005",
+            "P006",
+            "P007",
+            "P008",
+            "P009",
+            "P010",
+            "P011",
+            "P012",
+            "P013",
+            "P014",
+            "P015"
+          ],
+          "n_unmatched_files": 0,
+          "note": "Restaurant-Logo raw format/labels not yet confirmed; audit lists files only."
+        },
+        {
+          "path": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/Neuromarketing (1).zip",
+          "exists": true,
+          "type": "zip",
+          "n_entries": 65,
+          "ext_hist": {
+            ".txt": 1,
+            ".xlsx": 3,
+            ".png": 1,
+            ".set": 30,
+            ".fdt": 30
+          },
+          "sample_entries": [
+            "Neuromarketing/8eeg_channles.txt",
+            "Neuromarketing/SubjectsData.xlsx",
+            "Neuromarketing/Eventg Labels.xlsx",
+            "Neuromarketing/ExperimentResults.xlsx",
+            "Neuromarketing/Neuromarketing.png",
+            "Neuromarketing/Subject 1/Sub1_Test.set",
+            "Neuromarketing/Subject 1/Sub1_Basal.set",
+            "Neuromarketing/Subject 1/Sub1_Basal.fdt",
+            "Neuromarketing/Subject 1/Sub1_Test.fdt",
+            "Neuromarketing/Subject 10/Sub10_Basal.set",
+            "Neuromarketing/Subject 10/Sub10_Test.set",
+            "Neuromarketing/Subject 10/Sub10_Basal.fdt",
+            "Neuromarketing/Subject 10/Sub10_Test.fdt",
+            "Neuromarketing/Subject 11/Sub11_Basal.set",
+            "Neuromarketing/Subject 11/Sub11_Test.set",
+            "Neuromarketing/Subject 11/Sub11_Basal.fdt",
+            "Neuromarketing/Subject 11/Sub11_Test.fdt",
+            "Neuromarketing/Subject 12/Sub12_Basal.set",
+            "Neuromarketing/Subject 12/Sub12_Test.set",
+            "Neuromarketing/Subject 12/Sub12_Basal.fdt",
+            "Neuromarketing/Subject 12/Sub12_Test.fdt",
+            "Neuromarketing/Subject 13/Sub13_Basal.set",
+            "Neuromarketing/Subject 13/Sub13_Basal.fdt",
+            "Neuromarketing/Subject 13/Sub13_Test.set",
+            "Neuromarketing/Subject 13/Sub13_Test.fdt",
+            "Neuromarketing/Subject 14/Sub14_Basal.set",
+            "Neuromarketing/Subject 14/Sub14_Basal.fdt",
+            "Neuromarketing/Subject 14/Sub14_Test.fdt",
+            "Neuromarketing/Subject 14/Sub14_Test.set",
+            "Neuromarketing/Subject 15/Sub15_Basal.set"
+          ],
+          "testzip_ok": "skipped(smoke)"
+        }
+      ],
+      "n_existing_candidates": 2,
+      "processed": [
+        {
+          "dataset": "restaurant_logo",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/restaurant_logo/restaurant_logo_harmonized.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            450,
+            36
+          ],
+          "shape_y": [
+            450
+          ],
+          "shape_subject_ids": [
+            450
+          ],
+          "label_counts": {
+            "1": 305,
+            "0": 145
+          },
+          "n_subjects": 15,
+          "subject_ids": [
+            "S1",
+            "S10",
+            "S11",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6",
+            "S7",
+            "S8",
+            "S9"
+          ],
+          "X_finite": true,
+          "X_std": 0.11290089264632658
+        },
+        {
+          "dataset": "restaurant_logo",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/restaurant_logo/restaurant_logo_epochs.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            450,
+            1,
+            7,
+            750
+          ],
+          "shape_y": [
+            450
+          ],
+          "shape_subject_ids": [
+            450
+          ],
+          "label_counts": {
+            "1": 305,
+            "0": 145
+          },
+          "n_subjects": 15,
+          "subject_ids": [
+            "S1",
+            "S10",
+            "S11",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6",
+            "S7",
+            "S8",
+            "S9"
+          ],
+          "X_finite": true,
+          "X_std": 1.7479936802921332e-05
+        },
+        {
+          "dataset": "restaurant_logo",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/restaurant_logo/restaurant_logo_epochs_common.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            450,
+            1,
+            7,
+            250
+          ],
+          "shape_y": [
+            450
+          ],
+          "shape_subject_ids": [
+            450
+          ],
+          "label_counts": {
+            "1": 305,
+            "0": 145
+          },
+          "n_subjects": 15,
+          "subject_ids": [
+            "S1",
+            "S10",
+            "S11",
+            "S12",
+            "S13",
+            "S14",
+            "S15",
+            "S2",
+            "S3",
+            "S4",
+            "S5",
+            "S6",
+            "S7",
+            "S8",
+            "S9"
+          ],
+          "X_finite": true,
+          "X_std": 1.635801891097799e-05
+        }
+      ]
+    },
+    "ds007406": {
+      "label_task": "Extreme vs Traditional advertisements",
+      "confirmed": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/ds007406/open Neuro",
+      "candidates": [
+        {
+          "path": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/ds007406/open Neuro",
+          "exists": true,
+          "n_subject_dirs": 10,
+          "participant_ids": [
+            "sub-001",
+            "sub-002",
+            "sub-003",
+            "sub-004",
+            "sub-005",
+            "sub-006",
+            "sub-007",
+            "sub-008",
+            "sub-009",
+            "sub-010"
+          ],
+          "duplicate_ids": [],
+          "participants_tsv": true,
+          "dataset_description": true,
+          "missing_required_files": []
+        },
+        {
+          "path": "/home/nvidia/24PHD1314/Quality-Aware-Consumer-Response/data/ds007406",
+          "exists": true,
+          "n_subject_dirs": 10,
+          "participant_ids": [
+            "sub-001",
+            "sub-002",
+            "sub-003",
+            "sub-004",
+            "sub-005",
+            "sub-006",
+            "sub-007",
+            "sub-008",
+            "sub-009",
+            "sub-010"
+          ],
+          "duplicate_ids": [],
+          "participants_tsv": true,
+          "dataset_description": true,
+          "missing_required_files": []
+        }
+      ],
+      "n_existing_candidates": 2,
+      "processed": [
+        {
+          "dataset": "ds007406",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/ds007406/ds007406_harmonized.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            60,
+            36
+          ],
+          "shape_y": [
+            60
+          ],
+          "shape_subject_ids": [
+            60
+          ],
+          "label_counts": {
+            "1": 30,
+            "0": 30
+          },
+          "n_subjects": 10,
+          "subject_ids": [
+            "sub-001",
+            "sub-002",
+            "sub-003",
+            "sub-004",
+            "sub-005",
+            "sub-006",
+            "sub-007",
+            "sub-008",
+            "sub-009",
+            "sub-010"
+          ],
+          "X_finite": true,
+          "X_std": 0.12879377317035562
+        },
+        {
+          "dataset": "ds007406",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/ds007406/ds007406_epochs.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            60,
+            1,
+            7,
+            7681
+          ],
+          "shape_y": [
+            60
+          ],
+          "shape_subject_ids": [
+            60
+          ],
+          "label_counts": {
+            "1": 30,
+            "0": 30
+          },
+          "n_subjects": 10,
+          "subject_ids": [
+            "sub-001",
+            "sub-002",
+            "sub-003",
+            "sub-004",
+            "sub-005",
+            "sub-006",
+            "sub-007",
+            "sub-008",
+            "sub-009",
+            "sub-010"
+          ],
+          "X_finite": true,
+          "X_std": 2.3255077507665854e-05
+        },
+        {
+          "dataset": "ds007406",
+          "file": "/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/processed/ds007406/ds007406_epochs_common.npz",
+          "exists": true,
+          "keys": [
+            "X",
+            "y",
+            "subject_ids"
+          ],
+          "shape_X": [
+            60,
+            1,
+            7,
+            250
+          ],
+          "shape_y": [
+            60
+          ],
+          "shape_subject_ids": [
+            60
+          ],
+          "label_counts": {
+            "1": 30,
+            "0": 30
+          },
+          "n_subjects": 10,
+          "subject_ids": [
+            "sub-001",
+            "sub-002",
+            "sub-003",
+            "sub-004",
+            "sub-005",
+            "sub-006",
+            "sub-007",
+            "sub-008",
+            "sub-009",
+            "sub-010"
+          ],
+          "X_finite": true,
+          "X_std": 2.4073136955848895e-05
+        }
+      ]
+    }
+  }
+}

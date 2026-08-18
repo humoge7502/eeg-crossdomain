@@ -1,0 +1,9 @@
+candidate,dataset,duplicates,error,exists,missing_files,n_participants
+/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/neuma,neuma,0,,True,0,42
+/mnt/Neuma_Model/DataSource,neuma,0,,True,0,42
+/home/nvidia/24PHD1314/Quality-Aware-Consumer-Response/data/neuma_raw,neuma,0,,True,0,42
+/home/nvidia/24PHD1314/ICAIN2026_NeuroClick_Hazard/neuma_source,neuma,0,,True,0,0
+/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/restaurant_logo/Neuromarketing,restaurant_logo,0,,True,0,15
+/home/nvidia/24PHD1314/eeg-crossdomain-workspace/Neuromarketing (1).zip,restaurant_logo,0,,True,0,0
+/home/nvidia/24PHD1314/eeg-crossdomain-workspace/data/raw/ds007406/open Neuro,ds007406,0,,True,0,10
+/home/nvidia/24PHD1314/Quality-Aware-Consumer-Response/data/ds007406,ds007406,0,,True,0,10

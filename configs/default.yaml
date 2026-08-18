@@ -1,0 +1,86 @@
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  results_dir: "results"
+
+datasets:
+  neuma:
+    name: "NeuMa"
+    n_subjects: 42
+    n_channels: 20
+    sfreq: 300
+    channel_names: [P3, C3, F3, Fz, F4, C4, P4, Cz, Pz, Fp1, Fp2,
+                     T3, T5, O1, O2, F7, F8, A2, T6, T4]
+    task: "buy_nobuy"
+    labels: ["NoBuy", "Buy"]
+    download_url: "local: data/raw/neuma (real .xdf + Dependencies, product-level dwell-detected epochs)"
+    raw_format: "xdf"
+    epoch_window_sec: [-0.2, 1.0]
+
+  restaurant_logo:
+    name: "Restaurant-Logo Neuromarketing"
+    n_subjects: 15
+    n_channels: 8
+    sfreq: 250
+    channel_names: [Fz, C3, Cz, C4, Pz, PO7, Oz, PO8]
+    task: "recognized_notrecognized"
+    labels: ["NotRecognized", "Recognized"]
+    download_url: "https://data.mendeley.com/datasets/r9cbjnpt52/1"
+    raw_format: "edf"
+    epoch_window_sec: [0.0, 3.0]
+
+  ds007406:
+    name: "OpenNeuro ds007406"
+    n_subjects: 10
+    n_channels: 14
+    sfreq: 256
+    channel_names: [AF3, F7, F3, FC5, T7, P7, O1, O2, P8, T8, FC6, F4, F8, AF4]
+    task: "extreme_traditional"
+    labels: ["Traditional", "Extreme"]
+    download_url: "https://openneuro.org/datasets/ds007406"
+    raw_format: "bids_eeg"
+    epoch_window_sec: [0.0, 4.0]
+
+harmonization:
+  shared_channels: [Fz, Cz, Pz, F3, F4, O1, O2]
+  nearest_neighbor_fallback: true
+  bands:
+    delta: [1, 4]
+    theta: [4, 8]
+    alpha: [8, 13]
+    beta: [13, 30]
+    gamma: [30, 45]
+  asymmetry_pairs: [[F3, F4]]
+
+preprocessing:
+  bandpass_low: 0.5
+  bandpass_high: 45.0
+  notch_freq: 50.0
+  ica_n_components: 15
+  resample_to: null
+
+alignment:
+  method: "riemannian"
+  riemannian_metric: "riemann"
+
+model:
+  encoder: "eegnet_shared"
+  embedding_dim: 64
+  dropout: 0.25
+  n_filters_temporal: 8
+  n_filters_spatial: 16
+
+training:
+  batch_size: 32
+  epochs: 100
+  learning_rate: 0.001
+  optimizer: "adam"
+  early_stopping_patience: 15
+  seed: 42
+  device: "cuda"
+
+evaluation:
+  permutation_test_n: 1000
+  cv_folds_within_dataset: 5
+  lodo: true
+  metrics: [accuracy, f1, cohen_kappa, auc]
