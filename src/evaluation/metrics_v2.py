@@ -59,3 +59,14 @@ def choose_threshold(y_train, p_train, grid=None):
         yh = (p >= t).astype(int); ba = 0.5 * ((yh[y == 1] == 1).mean() + (yh[y == 0] == 0).mean())
         if ba > best + 1e-12: best, bt = ba, float(t)
     return bt
+
+
+def choose_threshold(y_train, p_train, grid=None):
+    """Threshold maximising balanced accuracy on TRAINING (or validation) predictions. Never uses test data."""
+    y = np.asarray(y_train).astype(int); p = np.asarray(p_train, float)
+    if len(np.unique(y)) < 2 or len(p) == 0: return 0.5
+    grid = np.unique(np.quantile(p, np.linspace(0.02, 0.98, 97))) if grid is None else grid; best, bt = -1, 0.5
+    for t in grid:
+        yh = (p >= t).astype(int); ba = 0.5 * ((yh[y == 1] == 1).mean() + (yh[y == 0] == 0).mean())
+        if ba > best + 1e-12: best, bt = ba, float(t)
+    return bt
