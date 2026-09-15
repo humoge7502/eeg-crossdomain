@@ -1,0 +1,49 @@
+{
+ "timestamp": "20260818_090638",
+ "experiments": {
+  "exp1_leakage": {
+   "n_prediction_files": 1800,
+   "n_rows": 312480,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "models": [
+    "deepconvnet",
+    "eegnet",
+    "logreg",
+    "svm_rbf"
+   ],
+   "protocols": [
+    "epochwise",
+    "permuted_subjectwise",
+    "subjectwise"
+   ]
+  },
+  "exp2_within": {
+   "n_prediction_files": 600,
+   "n_rows": 156240,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "models": [
+    "deepconvnet",
+    "eegnet",
+    "logreg",
+    "mlp",
+    "svm_rbf",
+    "xgboost"
+   ],
+   "protocols": [
+    "subjectwise"
+   ]
+  }
+ }
+}

@@ -1,0 +1,32 @@
+{
+  "dataset": "ds007406",
+  "config": {
+    "n_cv_folds": 5,
+    "max_epochs": 15,
+    "lr": 0.001,
+    "n_permutations": 500,
+    "permutation_scheme": "within_subject"
+  },
+  "observed_kappa": -0.01666666666666663,
+  "observed_fold_kappas": [
+    -0.005555555555555536,
+    -0.022222222222222143,
+    -0.05555555555555558,
+    0.022222222222222254,
+    -0.022222222222222143
+  ],
+  "bootstrap_ci_90": [
+    -0.03555555555555552,
+    0.0022222222222222586
+  ],
+  "null_mean": 0.00014888888888889306,
+  "null_std": 0.024290120025726458,
+  "null_95ci": [
+    -0.04666666666666667,
+    0.04777777777777778
+  ],
+  "p_value": 0.7504990019960079,
+  "p_value_formula": "(1 + count(perm_kappa >= observed_kappa)) / (1 + N_PERMUTATIONS)",
+  "significant_at_0.05": false,
+  "wall_time_minutes": 33.72745620409648
+}

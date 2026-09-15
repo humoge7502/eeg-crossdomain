@@ -1,0 +1,15 @@
+{
+  "dataset": "ds007406",
+  "observed_kappa": 0.10999999999999999,
+  "null_mean": 0.0004622222222222201,
+  "null_std": 0.020401008931719502,
+  "null_95ci": [
+    -0.043333333333333224,
+    0.03888888888888886
+  ],
+  "p_value": 0.000999000999000999,
+  "p_value_formula": "(1 + count(perm_kappa >= observed_kappa)) / (1 + N_PERMUTATIONS)",
+  "n_permutations": 1000,
+  "significant_at_0.05": true,
+  "wall_time_minutes": 61.46060166358948
+}

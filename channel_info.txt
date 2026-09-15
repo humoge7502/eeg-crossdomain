@@ -1,0 +1,4 @@
+Channels: ['C4', 'Cz', 'Fz', 'C3', 'Pz', 'PO7', 'Oz', 'PO8']
+N channels: 8
+Sampling rate: 250.0
+Duration (s): 200.996

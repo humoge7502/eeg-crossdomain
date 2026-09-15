@@ -1,0 +1,158 @@
+{
+  "neuma": {
+    "svm_psd_pai": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.7410790797159816,
+      "cv_accuracy_std": 0.000358708995843609,
+      "cv_folds": 5
+    },
+    "svm_shuffled_control": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.7412913939410347,
+      "cv_accuracy_std": 0.000515252321170244,
+      "cv_folds": 5
+    },
+    "mdm_riemannian": {
+      "model": "MDM (Riemannian covariance)",
+      "cv_accuracy_mean": 0.5067945064540365,
+      "cv_accuracy_std": 0.015483873862710794,
+      "cv_folds": 5
+    },
+    "eegnet": {
+      "model": "EEGNet",
+      "mean": {
+        "accuracy": 0.5987811674349238,
+        "f1": 0.6127992651103618,
+        "cohen_kappa": 0.05992665663172161,
+        "auc": 0.5442294971679149
+      },
+      "std": {
+        "accuracy": 0.03979042000558751,
+        "f1": 0.029724203327882625,
+        "cohen_kappa": 0.017929403899613578,
+        "auc": 0.01568157003906759
+      },
+      "n_splits": 5
+    },
+    "deepconvnet": {
+      "model": "DeepConvNet",
+      "mean": {
+        "accuracy": 0.5859949324362436,
+        "f1": 0.5997126511930573,
+        "cohen_kappa": 0.06100794998772063,
+        "auc": 0.5486093768724098
+      },
+      "std": {
+        "accuracy": 0.0653749217193177,
+        "f1": 0.04891099219844764,
+        "cohen_kappa": 0.024767325784373205,
+        "auc": 0.011268520314868694
+      },
+      "n_splits": 5
+    }
+  },
+  "restaurant_logo": {
+    "svm_psd_pai": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.6777777777777778,
+      "cv_accuracy_std": 0.0,
+      "cv_folds": 5
+    },
+    "svm_shuffled_control": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.6777777777777778,
+      "cv_accuracy_std": 0.0,
+      "cv_folds": 5
+    },
+    "mdm_riemannian": {
+      "model": "MDM (Riemannian covariance)",
+      "cv_accuracy_mean": 0.6066666666666667,
+      "cv_accuracy_std": 0.018053418676968788,
+      "cv_folds": 5
+    },
+    "eegnet": {
+      "model": "EEGNet",
+      "mean": {
+        "accuracy": 0.6644444444444444,
+        "f1": 0.562109851693166,
+        "cohen_kappa": 0.010593878903190324,
+        "auc": 0.5347654041831543
+      },
+      "std": {
+        "accuracy": 0.017777777777777806,
+        "f1": 0.01989137889315131,
+        "cohen_kappa": 0.019118516498915876,
+        "auc": 0.08347055137906466
+      },
+      "n_splits": 5
+    },
+    "deepconvnet": {
+      "model": "DeepConvNet",
+      "mean": {
+        "accuracy": 0.6066666666666667,
+        "f1": 0.4694967258426549,
+        "cohen_kappa": 0.0,
+        "auc": 0.45918598078010175
+      },
+      "std": {
+        "accuracy": 0.14222222222222222,
+        "f1": 0.15622361969070186,
+        "cohen_kappa": 0.0,
+        "auc": 0.04660879317059673
+      },
+      "n_splits": 5
+    }
+  },
+  "ds007406": {
+    "svm_psd_pai": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.29999999999999993,
+      "cv_accuracy_std": 0.0408248290463863,
+      "cv_folds": 5
+    },
+    "svm_shuffled_control": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.4666666666666666,
+      "cv_accuracy_std": 0.17159383568311665,
+      "cv_folds": 5
+    },
+    "mdm_riemannian": {
+      "model": "MDM (Riemannian covariance)",
+      "cv_accuracy_mean": 0.36666666666666664,
+      "cv_accuracy_std": 0.15456030825826172,
+      "cv_folds": 5
+    },
+    "eegnet": {
+      "model": "EEGNet",
+      "mean": {
+        "accuracy": 0.5,
+        "f1": 0.3333333333333333,
+        "cohen_kappa": 0.0,
+        "auc": 0.4722222222222222
+      },
+      "std": {
+        "accuracy": 0.0,
+        "f1": 0.0,
+        "cohen_kappa": 0.0,
+        "auc": 0.16077551253875313
+      },
+      "n_splits": 5
+    },
+    "deepconvnet": {
+      "model": "DeepConvNet",
+      "mean": {
+        "accuracy": 0.5,
+        "f1": 0.3333333333333333,
+        "cohen_kappa": 0.0,
+        "auc": 0.6416666666666667
+      },
+      "std": {
+        "accuracy": 0.0,
+        "f1": 0.0,
+        "cohen_kappa": 0.0,
+        "auc": 0.14969103983674975
+      },
+      "n_splits": 5
+    }
+  }
+}

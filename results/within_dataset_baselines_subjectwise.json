@@ -1,0 +1,173 @@
+{
+  "neuma": {
+    "svm_psd_pai": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.740577819078719,
+      "cv_accuracy_std": 0.013629747030872228,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "svm_shuffled_control": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.7409319389465938,
+      "cv_accuracy_std": 0.01584443146708717,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "mdm_riemannian": {
+      "model": "MDM (Riemannian covariance)",
+      "cv_accuracy_mean": 0.5081287128135887,
+      "cv_accuracy_std": 0.04621802300516128,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "eegnet": {
+      "model": "EEGNet",
+      "mean": {
+        "accuracy": 0.5276691827797572,
+        "f1": 0.5151484802752722,
+        "cohen_kappa": -0.005430950512378252,
+        "auc": 0.4899404502477439
+      },
+      "std": {
+        "accuracy": 0.12721760877981284,
+        "f1": 0.11537259343018018,
+        "cohen_kappa": 0.02646821151407059,
+        "auc": 0.03643763984956727
+      },
+      "n_splits": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "deepconvnet": {
+      "model": "DeepConvNet",
+      "mean": {
+        "accuracy": 0.5283270890428247,
+        "f1": 0.5330898701645891,
+        "cohen_kappa": 0.040719641490968184,
+        "auc": 0.5252851809234486
+      },
+      "std": {
+        "accuracy": 0.10333779064425855,
+        "f1": 0.12221846986517904,
+        "cohen_kappa": 0.008878727491379771,
+        "auc": 0.015417678936981895
+      },
+      "n_splits": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    }
+  },
+  "restaurant_logo": {
+    "svm_psd_pai": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.6777777777777778,
+      "cv_accuracy_std": 0.04499657051403687,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "svm_shuffled_control": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.6777777777777778,
+      "cv_accuracy_std": 0.05115939748098375,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "mdm_riemannian": {
+      "model": "MDM (Riemannian covariance)",
+      "cv_accuracy_mean": 0.5955555555555556,
+      "cv_accuracy_std": 0.09365025558091322,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "eegnet": {
+      "model": "EEGNet",
+      "mean": {
+        "accuracy": 0.4444444444444445,
+        "f1": 0.2979217689746561,
+        "cohen_kappa": 0.0019559902200488866,
+        "auc": 0.5305025282495766
+      },
+      "std": {
+        "accuracy": 0.17213259316477406,
+        "f1": 0.19405873544872887,
+        "cohen_kappa": 0.003911980440097774,
+        "auc": 0.04712108049939076
+      },
+      "n_splits": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "deepconvnet": {
+      "model": "DeepConvNet",
+      "mean": {
+        "accuracy": 0.4066666666666666,
+        "f1": 0.25107029992405483,
+        "cohen_kappa": 0.0,
+        "auc": 0.5173136023377378
+      },
+      "std": {
+        "accuracy": 0.15785600564602703,
+        "f1": 0.17396248366951592,
+        "cohen_kappa": 0.0,
+        "auc": 0.0882108630646788
+      },
+      "n_splits": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    }
+  },
+  "ds007406": {
+    "svm_psd_pai": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.4666666666666666,
+      "cv_accuracy_std": 0.06666666666666668,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "svm_shuffled_control": {
+      "model": "SVM-RBF (PSD+PAI features)",
+      "cv_accuracy_mean": 0.4333333333333333,
+      "cv_accuracy_std": 0.09718253158075502,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "mdm_riemannian": {
+      "model": "MDM (Riemannian covariance)",
+      "cv_accuracy_mean": 0.4166666666666667,
+      "cv_accuracy_std": 0.10540925533894599,
+      "cv_folds": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "eegnet": {
+      "model": "EEGNet",
+      "mean": {
+        "accuracy": 0.4833333333333334,
+        "f1": 0.3254901960784313,
+        "cohen_kappa": -0.03333333333333335,
+        "auc": 0.6194444444444445
+      },
+      "std": {
+        "accuracy": 0.03333333333333333,
+        "f1": 0.01568627450980391,
+        "cohen_kappa": 0.06666666666666668,
+        "auc": 0.08221471437193746
+      },
+      "n_splits": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    },
+    "deepconvnet": {
+      "model": "DeepConvNet",
+      "mean": {
+        "accuracy": 0.5,
+        "f1": 0.3333333333333333,
+        "cohen_kappa": 0.0,
+        "auc": 0.5111111111111112
+      },
+      "std": {
+        "accuracy": 0.0,
+        "f1": 0.0,
+        "cohen_kappa": 0.0,
+        "auc": 0.11567034896476117
+      },
+      "n_splits": 5,
+      "split_type": "subject-wise (StratifiedGroupKFold)"
+    }
+  }
+}

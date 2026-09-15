@@ -1,0 +1,15 @@
+{
+  "dataset": "restaurant_logo",
+  "observed_kappa": -0.015744680851063952,
+  "null_mean": -0.0004476595744681211,
+  "null_std": 0.009033164547787057,
+  "null_95ci": [
+    -0.015744680851063952,
+    0.017021276595744594
+  ],
+  "p_value": 0.985014985014985,
+  "p_value_formula": "(1 + count(perm_kappa >= observed_kappa)) / (1 + N_PERMUTATIONS)",
+  "n_permutations": 1000,
+  "significant_at_0.05": false,
+  "wall_time_minutes": 60.85175616741181
+}

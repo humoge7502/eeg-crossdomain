@@ -1,0 +1,23 @@
+{
+  "neuma": {
+    "observed_kappa": -0.008410678424400908,
+    "null_mean": -0.008548604160308667,
+    "null_std": 0.012934691922752702,
+    "p_value": 0.5064935064935064,
+    "significant_at_0.05": false
+  },
+  "restaurant_logo": {
+    "observed_kappa": 0.029073816155988808,
+    "null_mean": 0.04092409470752079,
+    "null_std": 0.02470720499675584,
+    "p_value": 0.7162837162837162,
+    "significant_at_0.05": false
+  },
+  "ds007406": {
+    "observed_kappa": 0.020000000000000018,
+    "null_mean": -0.00033111111111110424,
+    "null_std": 0.016212599733647182,
+    "p_value": 0.11588411588411589,
+    "significant_at_0.05": false
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "dataset": "restaurant_logo",
+  "config": {
+    "n_cv_folds": 5,
+    "max_epochs": 15,
+    "lr": 0.001,
+    "n_permutations": 500,
+    "permutation_scheme": "within_subject"
+  },
+  "observed_kappa": 0.012076161672330698,
+  "observed_fold_kappas": [
+    0.11883862255232946,
+    0.0009866798223977513,
+    -0.07533189255943173,
+    0.036036036036036,
+    -0.02014863748967799
+  ],
+  "bootstrap_ci_90": [
+    -0.03376781259274919,
+    0.062147199399825735
+  ],
+  "null_mean": 0.002481833319742919,
+  "null_std": 0.021653915347340576,
+  "null_95ci": [
+    -0.038579959198971815,
+    0.04355165755253244
+  ],
+  "p_value": 0.3253493013972056,
+  "p_value_formula": "(1 + count(perm_kappa >= observed_kappa)) / (1 + N_PERMUTATIONS)",
+  "significant_at_0.05": false,
+  "wall_time_minutes": 25.09813810189565
+}

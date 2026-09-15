@@ -1,0 +1,68 @@
+[
+  {
+    "dataset": "neuma",
+    "n_trials": 4708,
+    "n_subjects": 42,
+    "conservative_within_subject": true,
+    "observed_kappa": -0.0008489460950569239,
+    "observed_auc": 0.48733532858807865,
+    "p_kappa_raw": 1.0,
+    "p_auc_raw": 0.8790604697651174,
+    "kappa_ci_90": [
+      -0.0023575883577083624,
+      0.0
+    ],
+    "auc_ci_90": [
+      0.47081079877414495,
+      0.5
+    ],
+    "equivalent_to_no_transfer": true,
+    "equivalence_margin": 0.1,
+    "p_kappa_holm": 1.0,
+    "p_auc_holm": 1.0
+  },
+  {
+    "dataset": "restaurant_logo",
+    "n_trials": 450,
+    "n_subjects": 15,
+    "conservative_within_subject": true,
+    "observed_kappa": 0.0,
+    "observed_auc": 0.47572639909553427,
+    "p_kappa_raw": 1.0,
+    "p_auc_raw": 0.7756121939030485,
+    "kappa_ci_90": [
+      0.0,
+      0.0
+    ],
+    "auc_ci_90": [
+      0.4351319454097109,
+      0.5163689555367067
+    ],
+    "equivalent_to_no_transfer": true,
+    "equivalence_margin": 0.1,
+    "p_kappa_holm": 1.0,
+    "p_auc_holm": 1.0
+  },
+  {
+    "dataset": "ds007406",
+    "n_trials": 60,
+    "n_subjects": 10,
+    "conservative_within_subject": true,
+    "observed_kappa": 0.0,
+    "observed_auc": 0.48333333333333334,
+    "p_kappa_raw": 1.0,
+    "p_auc_raw": 1.0,
+    "kappa_ci_90": [
+      0.0,
+      0.0
+    ],
+    "auc_ci_90": [
+      0.45,
+      0.5
+    ],
+    "equivalent_to_no_transfer": true,
+    "equivalence_margin": 0.1,
+    "p_kappa_holm": 1.0,
+    "p_auc_holm": 1.0
+  }
+]

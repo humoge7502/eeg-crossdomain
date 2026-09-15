@@ -1,0 +1,15 @@
+{
+  "dataset": "neuma",
+  "observed_kappa": -0.0017522370202800452,
+  "null_mean": -0.000813452066729545,
+  "null_std": 0.0017649339191759662,
+  "null_95ci": [
+    -0.0033877508766395614,
+    0.0031543045487989474
+  ],
+  "p_value": 0.8321678321678322,
+  "p_value_formula": "(1 + count(perm_kappa >= observed_kappa)) / (1 + N_PERMUTATIONS)",
+  "n_permutations": 1000,
+  "significant_at_0.05": false,
+  "wall_time_minutes": 58.743247445424394
+}

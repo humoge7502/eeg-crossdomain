@@ -14,9 +14,18 @@ N_CV_FOLDS = 3
 MAX_EPOCHS = 10
 
 def load_neuma(cfg):
-    p = project_root() / "data" / "processed" / "neuma" / "neuma_epochs_common.npz"
+    p = project_root() / "data" / "processed_v2" / "neuma" / "neuma_windows_common_v2.npz"
     d = np.load(p, allow_pickle=True)
-    return d["X"], d["y"], d["subject_ids"]
+    X = d["X"]
+    # Per-trial, per-channel z-scoring: raw values are ~1e-6 scale, which
+    # caused DeepConvNet+BatchNorm to collapse to constant-class prediction
+    # (val_loss exploding, kappa stuck at exactly 0.0 across all folds/perms).
+    # Verified fix: standardizing each trial's time axis to unit variance
+    # stabilizes training (val_loss steady ~0.68-0.73, kappa varies normally).
+    mu = X.mean(axis=-1, keepdims=True)
+    sd = X.std(axis=-1, keepdims=True) + 1e-8
+    X = (X - mu) / sd
+    return X[:, None, :, :], d["y"], d["subject_ids"]
 
 def run_subjectwise_cv_once(X, y, groups, cfg, device, n_splits=N_CV_FOLDS, max_epochs=MAX_EPOCHS):
     n_channels, n_timepoints = X.shape[2], X.shape[3]
@@ -38,7 +47,7 @@ def run_subjectwise_cv_once(X, y, groups, cfg, device, n_splits=N_CV_FOLDS, max_
         test_loader = DataLoader(EEGTensorDataset(X_test, y_test), batch_size=64, shuffle=False)
 
         model = DeepConvNet(n_channels=n_channels, n_timepoints=n_timepoints)
-        trained = train_one_model(model, train_loader, val_loader, device, epochs=max_epochs, lr=0.002, early_stopping_patience=5)
+        trained = train_one_model(model, train_loader, val_loader, device, epochs=max_epochs, lr=0.0002, early_stopping_patience=5)
         result = evaluate_model(trained["model"], test_loader, device)
         fold_kappas.append(result["metrics"]["cohen_kappa"])
     return float(np.mean(fold_kappas)), fold_kappas

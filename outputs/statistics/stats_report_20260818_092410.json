@@ -1,0 +1,27 @@
+{
+ "timestamp": "20260818_092410",
+ "experiments": {
+  "exp1_leakage": {
+   "n_prediction_files": 1800,
+   "n_rows": 312480,
+   "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "models": [
+    "deepconvnet",
+    "eegnet",
+    "logreg",
+    "svm_rbf"
+   ],
+   "protocols": [
+    "epochwise",
+    "permuted_subjectwise",
+    "subjectwise"
+   ]
+  }
+ }
+}

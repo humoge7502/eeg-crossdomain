@@ -1,0 +1,32 @@
+{
+  "dataset": "neuma",
+  "config": {
+    "n_cv_folds": 5,
+    "max_epochs": 15,
+    "lr": 0.001,
+    "n_permutations": 500,
+    "permutation_scheme": "within_subject"
+  },
+  "observed_kappa": -0.002210717840545473,
+  "observed_fold_kappas": [
+    0.0012820320019247822,
+    -0.017137979458655694,
+    -0.01347453808021637,
+    0.006779408477985527,
+    0.01149748785623439
+  ],
+  "bootstrap_ci_90": [
+    -0.01088912531995172,
+    0.005679933182773378
+  ],
+  "null_mean": 0.0003954203355032812,
+  "null_std": 0.013991007117173115,
+  "null_95ci": [
+    -0.025834523701379068,
+    0.02853447656331582
+  ],
+  "p_value": 0.5868263473053892,
+  "p_value_formula": "(1 + count(perm_kappa >= observed_kappa)) / (1 + N_PERMUTATIONS)",
+  "significant_at_0.05": false,
+  "wall_time_minutes": 78.49983053207397
+}

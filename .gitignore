@@ -1,6 +1,12 @@
 venv/
 data/
-results/
+# results: version the text reports (md/json/csv), ignore the heavy artifacts
+# (predictions .npz, run logs, checkpoints, scratch dirs)
+results/*
+!results/*.md
+!results/*.json
+!results/*.csv
+results/nods/
 outputs/predictions/
 outputs/logs/
 outputs/checkpoints/
@@ -13,3 +19,13 @@ outputs/checkpoints/
 __pycache__/
 .ipynb_checkpoints/
 Untitled Folder/
+
+# machine-local / environment files
+.env
+.venv/
+nohup.out
+.DS_Store
+
+# backup copies of edited scripts (keep out of the repo; git history is the backup)
+*.bak*
+*.bak_*

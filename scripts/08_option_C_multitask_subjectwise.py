@@ -12,7 +12,7 @@ from src.evaluate import compute_metrics
 def load_all(cfg):
     data = {}
     for name in cfg["datasets"].keys():
-        p = project_root() / "data" / "processed" / name / f"{name}_harmonized.npz"
+        p = project_root() / "data" / "processed_v2" / name / f"{name}_features_persubj_v2.npz"
         d = np.load(p, allow_pickle=True)
         subject_ids = d["subject_ids"] if "subject_ids" in d else None
         if subject_ids is None:

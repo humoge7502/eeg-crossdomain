@@ -1,0 +1,83 @@
+# Sensitivity config: ds007406 DROPPED.
+#
+# Purpose (PROJECT_STATUS.md item 3): rule out "bad harmonization for the one
+# dataset with no true midline channels" as an alternative explanation for the
+# null transfer result, by re-running LODO on NeuMa <-> Restaurant-Logo only.
+#
+# Everything except paths.results_dir and the datasets block is byte-identical
+# to configs/default.yaml. Run with:
+#   python scripts/04_run_lodo_experiment.py --config configs/default_no_ds007406.yaml --tag nods
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  results_dir: "results"
+
+datasets:
+  neuma:
+    name: "NeuMa"
+    n_subjects: 42
+    n_channels: 20
+    sfreq: 300
+    channel_names: [P3, C3, F3, Fz, F4, C4, P4, Cz, Pz, Fp1, Fp2,
+                     T3, T5, O1, O2, F7, F8, A2, T6, T4]
+    task: "buy_nobuy"
+    labels: ["NoBuy", "Buy"]
+    download_url: "local: data/raw/neuma (real .xdf + Dependencies, product-level dwell-detected epochs)"
+    raw_format: "xdf"
+    epoch_window_sec: [-0.2, 1.0]
+
+  restaurant_logo:
+    name: "Restaurant-Logo Neuromarketing"
+    n_subjects: 15
+    n_channels: 8
+    sfreq: 250
+    channel_names: [Fz, C3, Cz, C4, Pz, PO7, Oz, PO8]
+    task: "recognized_notrecognized"
+    labels: ["NotRecognized", "Recognized"]
+    download_url: "https://data.mendeley.com/datasets/r9cbjnpt52/1"
+    raw_format: "edf"
+    epoch_window_sec: [0.0, 3.0]
+
+harmonization:
+  shared_channels: [Fz, Cz, Pz, F3, F4, O1, O2]
+  nearest_neighbor_fallback: true
+  bands:
+    delta: [1, 4]
+    theta: [4, 8]
+    alpha: [8, 13]
+    beta: [13, 30]
+    gamma: [30, 45]
+  asymmetry_pairs: [[F3, F4]]
+
+preprocessing:
+  bandpass_low: 0.5
+  bandpass_high: 45.0
+  notch_freq: 50.0
+  ica_n_components: 15
+  resample_to: null
+
+alignment:
+  method: "riemannian"
+  riemannian_metric: "riemann"
+
+model:
+  encoder: "eegnet_shared"
+  embedding_dim: 64
+  dropout: 0.25
+  n_filters_temporal: 8
+  n_filters_spatial: 16
+
+training:
+  batch_size: 32
+  epochs: 100
+  learning_rate: 0.001
+  optimizer: "adam"
+  early_stopping_patience: 15
+  seed: 42
+  device: "cuda"
+
+evaluation:
+  permutation_test_n: 1000
+  cv_folds_within_dataset: 5
+  lodo: true
+  metrics: [accuracy, f1, cohen_kappa, auc]

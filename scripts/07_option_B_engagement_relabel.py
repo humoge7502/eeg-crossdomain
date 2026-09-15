@@ -14,7 +14,7 @@ def load_all_with_engagement(cfg):
     # minus mean alpha power (channels index 2 per channel), then median-split within each dataset.
     data = {}
     for name in cfg["datasets"].keys():
-        p = project_root() / "data" / "processed" / name / f"{name}_harmonized.npz"
+        p = project_root() / "data" / "processed_v2" / name / f"{name}_features_persubj_v2.npz"
         d = np.load(p)
         X = d["X"].astype(np.float32)
         n_bands = 5

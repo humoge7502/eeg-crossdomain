@@ -13,9 +13,10 @@ from src.alignment import coral_align
 def load_all(cfg):
     data = {}
     for name in cfg["datasets"].keys():
-        p = project_root() / "data" / "processed" / name / f"{name}_harmonized.npz"
+        p = project_root() / "data" / "processed_v2" / name / f"{name}_features_persubj_v2.npz"
         d = np.load(p)
-        data[name] = (d["X"].astype(np.float32), d["y"].astype(np.int64))
+        subject_ids = d["subject_ids"] if "subject_ids" in d else None
+        data[name] = (d["X"].astype(np.float32), d["y"].astype(np.int64), subject_ids)
     return data
 
 def train_eval(X_train, y_train, X_test, y_test, cfg, device, tag):
@@ -64,7 +65,7 @@ def train_eval(X_train, y_train, X_test, y_test, cfg, device, tag):
         preds = logits.argmax(dim=1).cpu().numpy()
     metrics = compute_metrics(yte.numpy(), preds, probs)
     print(f"  [{tag}] {metrics}")
-    return metrics
+    return metrics, yte.numpy(), probs, encoder.state_dict()
 
 def main():
     cfg = load_config(str(project_root() / "configs/default.yaml"))
@@ -81,16 +82,24 @@ def main():
         train_keys = [k for k in all_data if k != held_out]
         X_train = np.concatenate([all_data[k][0] for k in train_keys], axis=0)
         y_train = np.concatenate([all_data[k][1] for k in train_keys], axis=0)
-        X_test, y_test = all_data[held_out]
+        X_test, y_test, test_subject_ids = all_data[held_out]
 
         print(f"\n--- held_out={held_out} (no alignment) ---")
-        m1 = train_eval(X_train, y_train, X_test, y_test, cfg, device, f"noalign_{held_out}")
+        m1, yt1, yp1, enc_state1 = train_eval(X_train, y_train, X_test, y_test, cfg, device, f"noalign_{held_out}")
         fold_results_noalign.append({"held_out": held_out, "metrics": m1})
+        np.savez(results_dir / f"optionA_predictions_noalign_{held_out}.npz",
+                 y_true=yt1, y_prob=yp1,
+                 subject_ids=test_subject_ids if test_subject_ids is not None else np.array([]))
+        torch.save(enc_state1, results_dir / f"optionA_encoder_noalign_{held_out}.pt")
 
         print(f"--- held_out={held_out} (CORAL aligned to target stats) ---")
         X_train_aligned = coral_align(X_train, X_test).astype(np.float32)
-        m2 = train_eval(X_train_aligned, y_train, X_test, y_test, cfg, device, f"coral_{held_out}")
+        m2, yt2, yp2, enc_state2 = train_eval(X_train_aligned, y_train, X_test, y_test, cfg, device, f"coral_{held_out}")
         fold_results_coral.append({"held_out": held_out, "metrics": m2})
+        np.savez(results_dir / f"optionA_predictions_coral_{held_out}.npz",
+                 y_true=yt2, y_prob=yp2,
+                 subject_ids=test_subject_ids if test_subject_ids is not None else np.array([]))
+        torch.save(enc_state2, results_dir / f"optionA_encoder_coral_{held_out}.pt")
 
     summary_noalign = summarize_lodo_results(fold_results_noalign)
     summary_coral = summarize_lodo_results(fold_results_coral)

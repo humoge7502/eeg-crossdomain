@@ -1,0 +1,81 @@
+{
+  "option_a_encoder_cka": {
+    "noalign_neumaheld_out_restaurant_logo_vs_ds007406": {
+      "condition": "noalign",
+      "held_out": "neuma",
+      "pair": [
+        "restaurant_logo",
+        "ds007406"
+      ],
+      "cka": 0.0878455862402916
+    },
+    "noalign_restaurant_logoheld_out_neuma_vs_ds007406": {
+      "condition": "noalign",
+      "held_out": "restaurant_logo",
+      "pair": [
+        "neuma",
+        "ds007406"
+      ],
+      "cka": 0.10447466373443604
+    },
+    "noalign_ds007406held_out_neuma_vs_restaurant_logo": {
+      "condition": "noalign",
+      "held_out": "ds007406",
+      "pair": [
+        "neuma",
+        "restaurant_logo"
+      ],
+      "cka": 0.018225006759166718
+    },
+    "coral_neumaheld_out_restaurant_logo_vs_ds007406": {
+      "condition": "coral",
+      "held_out": "neuma",
+      "pair": [
+        "restaurant_logo",
+        "ds007406"
+      ],
+      "cka": 0.12481922656297684
+    },
+    "coral_restaurant_logoheld_out_neuma_vs_ds007406": {
+      "condition": "coral",
+      "held_out": "restaurant_logo",
+      "pair": [
+        "neuma",
+        "ds007406"
+      ],
+      "cka": 0.07808233797550201
+    },
+    "coral_ds007406held_out_neuma_vs_restaurant_logo": {
+      "condition": "coral",
+      "held_out": "ds007406",
+      "pair": [
+        "neuma",
+        "restaurant_logo"
+      ],
+      "cka": 0.021968871355056763
+    }
+  },
+  "solo_encoder_cka": {
+    "solo_neuma_vs_restaurant_logo": {
+      "pair": [
+        "neuma",
+        "restaurant_logo"
+      ],
+      "cka": 0.11291143298149109
+    },
+    "solo_neuma_vs_ds007406": {
+      "pair": [
+        "neuma",
+        "ds007406"
+      ],
+      "cka": 0.23923936486244202
+    },
+    "solo_restaurant_logo_vs_ds007406": {
+      "pair": [
+        "restaurant_logo",
+        "ds007406"
+      ],
+      "cka": 0.1156124547123909
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "observed_angle_deg": 66.02597045898438,
+  "bootstrap_mean": 66.09606525421142,
+  "bootstrap_std": 0.9474121849976728,
+  "bootstrap_ci_95": [
+    64.34496364593505,
+    68.17010383605957
+  ],
+  "random_null_mean_deg": 70.13,
+  "random_null_std_deg": 1.47,
+  "excludes_null": true
+}
